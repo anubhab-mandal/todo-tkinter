@@ -1,5 +1,5 @@
 # todo-tkinter
-A very basic ToDo list app with a progress bar built over tkinter, very shitty tkinter skills. Enjoy!
+A very basic ToDo list app with a progress bar built over tkinter, with very shitty tkinter skills. Enjoy!
 
 Installation
 ------------
@@ -7,7 +7,7 @@ Installation
 - Go to your desired directory
 - <code>git clone https://github.com/anubhab-mandal/todo-tkinter.git</code>
 - <code>cd todo-tkinter</code>
-- (if you dont have pyinstaller installed, then run <code>pip install pyinstaller</code>
+- If you dont have pyinstaller installed, then run <code>pip install pyinstaller</code>
 - <code>pyinstaller --onefile todoprog.py</code>
 
 That will build the app for your native OS.
