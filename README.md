@@ -16,7 +16,7 @@ That will build the app for your native OS.
 - Double click <code>todoprog</code> or run it from your shell
 
 
-Auf wiedersehen!
+auf Wiedersehen!
 ----------------
 
 P.S.: anybody looking forward to make this thing better, please contribute.
