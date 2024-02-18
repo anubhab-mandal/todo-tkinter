@@ -1,4 +1,4 @@
-# todo-tkinter
+# TODO-TKINTER
 A very basic ToDo list app with a progress bar built over tkinter, with very shitty tkinter skills. Enjoy!
 
 Installation
