@@ -1,5 +1,8 @@
 # TODO-TKINTER
 A very basic ToDo list app with a progress bar built over tkinter, with very shitty tkinter skills. Enjoy!
+Help
+----
+If you can please fix the SAVE LIST and OPEN LIST function, and make it better overall, then please do. Thanks in advance!
 
 Installation
 ------------

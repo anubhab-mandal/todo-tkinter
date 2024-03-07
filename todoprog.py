@@ -1,6 +1,7 @@
 import tkinter as tk
 import tkinter.font as tkFont
 from tkinter import ttk
+from tkinter import filedialog
 
 def add_item():
     item_text = entry.get()
@@ -38,6 +39,49 @@ def update_progress():
 
     # Update the progress label
     progress_label.config(text=f"{progress:.1f}%")
+
+def save_list():
+    filename = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=[("Text files", "*.txt")])
+    if filename:
+        with open(filename, "w") as file:
+            for _, var in items:
+                if var.get():
+                    file.write("X ")
+                else:
+                    file.write("- ")
+                file.write(var.winfo_parent().winfo_children()[1].cget("text") + "\n")
+
+def open_list():
+    filename = filedialog.askopenfilename(filetypes=[("Text files", "*.txt")])
+    if filename:
+        clear_list()
+        with open(filename, "r") as file:
+            for line in file:
+                checked, text = line.split(" ", 1)
+                item = tk.Frame(todo_list)
+                item.grid(sticky="w")
+
+                checkbox_var = tk.BooleanVar(value=checked == "X")
+                checkbox = tk.Checkbutton(item, variable=checkbox_var, onvalue=True, offvalue=False, command=update_progress)
+                checkbox.grid(row=0, column=0)
+
+                system_font = tkFont.nametofont("TkDefaultFont")
+
+                label = tk.Label(item, text=text,  wraplength=root.winfo_width(), font=system_font)
+                label.grid(row=0, column=1, padx=(0, 10))
+
+                remove_button = tk.Button(item, text="X",  command=lambda item=item, checkbox_var=checkbox_var: remove_item((item, checkbox_var)))
+                remove_button.grid(row=0, column=2, sticky="e")
+                todo_list.columnconfigure(2, weight=1)
+                items.append((item, checkbox_var))
+            update_progress()
+
+def clear_list():
+    for item_tuple in items:
+        item_frame, _ = item_tuple
+        item_frame.destroy()
+    items.clear()
+    update_progress()
 
 root = tk.Tk()
 root.title("ToDo List with Progress Bar")
@@ -92,7 +136,18 @@ progress_label.grid(row=2, column=0, columnspan=2)
 # Configure the label to be transparent
 progress_label.config(bd=0, highlightthickness=0)
 
+# Buttons for saving, opening, and clearing the list
+save_button = tk.Button(frame, text="Save List", command=save_list)
+save_button.grid(row=3, column=0, padx=5, pady=5)
+
+open_button = tk.Button(frame, text="Open List", command=open_list)
+open_button.grid(row=3, column=1, padx=5, pady=5)
+
+clear_button = tk.Button(frame, text="Clear List", command=clear_list)
+clear_button.grid(row=4, column=0, columnspan=2, padx=5, pady=5)
+
 root.columnconfigure(0, weight=1)  # Allow column to expand with window resizing
 root.rowconfigure(1, weight=1)     # Allow row to expand with window resizing
 
 root.mainloop()
+
